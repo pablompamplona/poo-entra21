@@ -24,11 +24,8 @@ public class Principal {
 		
 		for (int i = 0; i < empregados.size(); i++) {
 			Funcionario funcionarioAtual = empregados.get(i);
-			if (funcionarioAtual != null) {
-				System.out.println("Nome Funcionario: " + funcionarioAtual.getNome() + "  /  Valor Salario: R$ " + funcionarioAtual.calcularSalarioLiquido());
-				totalFolha += funcionarioAtual.calcularSalarioLiquido();
-			}
-			
+			System.out.println("Nome Funcionario: " + funcionarioAtual.getNome() + "  /  Valor Salario: R$ " + funcionarioAtual.calcularSalarioLiquido());
+			totalFolha += funcionarioAtual.calcularSalarioLiquido();
 		}
 		
 		System.out.println("");
