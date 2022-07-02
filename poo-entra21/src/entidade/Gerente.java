@@ -2,41 +2,24 @@ package entidade;
 
 public class Gerente extends Funcionario {
 	
-	private String setor;
-
-	public Gerente(String nome, double salario, String setor) {
-		super(nome, salario);
-		this.setor = setor;
+	public double calcularComissao() {
+//		double comissaoVendas = this.getSalarioBruto() * 0.15;
+		double comissaoVendas = 520.0;
+		return comissaoVendas;
 	}
-
 	@Override
 	public double calcularSalarioLiquido() {
-		return super.calcularSalarioLiquido() + calcularComissao() + calcularGratificacao();
+		double salarioLiquido = super.calcularSalarioLiquido() + calcularComissao();
+		return salarioLiquido;
 		
 	}
-	public double calcularComissao() {
-		return this.getSalario() * 0.15;
+	public Gerente() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	public double calcularGratificacao() {
-		this.setor.toUpperCase();
-		if (this.setor.equals("TI")) {
-			return 500.00;
-		} else {
-			return 0.00;
-		}
-		
+	public Gerente(String nome, String dataNascimento, double salarioBruto, String cpf, String dataAdmissao) {
+		super(nome, dataNascimento, salarioBruto, cpf, dataAdmissao);
+		// TODO Auto-generated constructor stub
 	}
-
-	public String getSetor() {
-		return setor;
-	}
-
-	public void setSetor(String setor) {
-		this.setor = setor;
-	}
-		
 	
-	
-	
-
 }

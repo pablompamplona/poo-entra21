@@ -3,20 +3,35 @@ package entidade;
 public class Funcionario {
 	
 	private String nome;
-	private double salario;
+	private String dataNascimento;
+	private double salarioBruto;
+	private String cpf;
+	private String dataAdmissao;
 	
-	public Funcionario(String nome, double salario) {
+	public Funcionario() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Funcionario(String nome, String dataNascimento, double salarioBruto, String cpf, String dataAdmissao) {
 		super();
 		this.nome = nome;
-		this.salario = salario;
+		this.dataNascimento = dataNascimento;
+		this.salarioBruto = salarioBruto;
+		this.cpf = cpf;
+		this.dataAdmissao = dataAdmissao;
 	}
 	
 	public double calcularSalarioLiquido() {
-		return this.getSalario() - calcularDesconto(); 
+		double salarioLiquido = 0.0;
+		salarioLiquido = this.getSalarioBruto() - calcularDesconto(); 
+		return salarioLiquido;
 	}
 	
 	public double calcularDesconto() {
-		return this.getSalario() * 0.12;
+		double descontosLegais = 0.0;
+		descontosLegais = this.getSalarioBruto() * 0.06;
+		return descontosLegais;
 	}
 
 	public String getNome() {
@@ -27,14 +42,36 @@ public class Funcionario {
 		this.nome = nome;
 	}
 
-	public double getSalario() {
-		return salario;
+	public String getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setSalario(double salario) {
-		this.salario = salario;
+	public void setDataNascimento(String dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
-	
-	
-	
+
+	public double getSalarioBruto() {
+		return salarioBruto;
+	}
+
+	public void setSalarioBruto(double salarioBruto) {
+		this.salarioBruto = salarioBruto;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getDataAdmissao() {
+		return dataAdmissao;
+	}
+
+	public void setDataAdmissao(String dataAdmissao) {
+		this.dataAdmissao = dataAdmissao;
+	}
+
 }
