@@ -2,6 +2,16 @@ package entidade;
 
 public class Diretor extends Funcionario {
 	
+	public Diretor() {
+		super();
+		
+	}
+
+	public Diretor(String nome, String dataNascimento, double salarioBruto, String cpf, String dataAdmissao) {
+		super(nome, dataNascimento, salarioBruto, cpf, dataAdmissao);
+		
+	}
+	
 	public double calcularAdicionalTempoServico () {
 		double adicionalTempoServico = 0;
 		int anoAtual = 2022;
@@ -12,21 +22,10 @@ public class Diretor extends Funcionario {
 		adicionalTempoServico = super.getSalarioBruto() * (indiceGratificacao * tempoServiço);
 		return adicionalTempoServico;
 	}
-	
+	@Override
 	public double calcularSalarioLiquido( ) {
 		double salarioLiquido = super.calcularSalarioLiquido() + calcularAdicionalTempoServico();
 		return salarioLiquido;
 	}
 
-	public Diretor() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Diretor(String nome, String dataNascimento, double salarioBruto, String cpf, String dataAdmissao) {
-		super(nome, dataNascimento, salarioBruto, cpf, dataAdmissao);
-		// TODO Auto-generated constructor stub
-	}
-	
-	
 }

@@ -2,9 +2,10 @@ package entidade;
 
 public class Gerente extends Funcionario {
 	
+	public static final double COMISSAO = 520.0;
+	
 	public double calcularComissao() {
-//		double comissaoVendas = this.getSalarioBruto() * 0.15;
-		double comissaoVendas = 520.0;
+		double comissaoVendas = COMISSAO;
 		return comissaoVendas;
 	}
 	@Override

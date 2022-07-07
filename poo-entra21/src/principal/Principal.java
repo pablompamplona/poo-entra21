@@ -33,17 +33,20 @@ public class Principal {
 		empregados.add(funcionario7);
 		
 	
-		double totalFolha = 0;
+		double totalFolha = 0, totalFolhaGerente = 0;
 		
 		for (int i = 0; i < empregados.size(); i++) {
 			Funcionario funcionarioAtual = empregados.get(i);
 			System.out.println("Nome Funcionario: " + funcionarioAtual.getNome() + "  /  Valor Salario: R$ " + funcionarioAtual.calcularSalarioLiquido());
 			totalFolha += funcionarioAtual.calcularSalarioLiquido();
+			if (funcionarioAtual instanceof Gerente) {
+				totalFolhaGerente += funcionarioAtual.calcularSalarioLiquido();
+			}
 		}
 		
 		System.out.println("");
 		System.out.println("Total Folha de Pagamento : R$ " + totalFolha);
-		
+		System.out.println("Total Folha de Pagamento dos Gerentes : R$ " + totalFolhaGerente);
 		
 	
 		
