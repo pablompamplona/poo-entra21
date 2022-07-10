@@ -6,12 +6,15 @@ public class Diretor extends Funcionario {
 		super();
 		
 	}
-
-	public Diretor(String nome, String dataNascimento, double salarioBruto, String cpf, String dataAdmissao) {
-		super(nome, dataNascimento, salarioBruto, cpf, dataAdmissao);
 		
+	public Diretor(String nome, String dataNascimento, double salarioBruto, String cpf, String dataAdmissao,
+			Endereco endereco) {
+		super(nome, dataNascimento, salarioBruto, cpf, dataAdmissao, endereco);
+		// TODO Auto-generated constructor stub
 	}
-	
+
+
+
 	public double calcularAdicionalTempoServico () {
 		double adicionalTempoServico = 0;
 		int anoAtual = 2022;

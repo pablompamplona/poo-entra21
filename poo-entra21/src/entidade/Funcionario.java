@@ -7,21 +7,24 @@ public class Funcionario {
 	private double salarioBruto;
 	private String cpf;
 	private String dataAdmissao;
+	private Endereco endereco;
 	
 	public Funcionario() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Funcionario(String nome, String dataNascimento, double salarioBruto, String cpf, String dataAdmissao) {
+	public Funcionario(String nome, String dataNascimento, double salarioBruto, String cpf, String dataAdmissao,
+			Endereco endereco) {
 		super();
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.salarioBruto = salarioBruto;
 		this.cpf = cpf;
 		this.dataAdmissao = dataAdmissao;
+		this.endereco = endereco;
 	}
-	
+
 	public double calcularSalarioLiquido() {
 		double salarioLiquido = 0.0;
 		salarioLiquido = this.getSalarioBruto() - calcularDesconto(); 
@@ -74,4 +77,11 @@ public class Funcionario {
 		this.dataAdmissao = dataAdmissao;
 	}
 
+	@Override
+	public String toString() {
+		return "Nome: " + nome + "\nData Nascto: " + dataNascimento + "\nCPF:" + cpf + 
+				"\nEnd: " + endereco + "\nData Admissao: " + dataAdmissao + "\nSalario Base: " + salarioBruto;
+	}
+
+	
 }
