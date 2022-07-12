@@ -1,5 +1,7 @@
 package entidade;
 
+import java.util.Scanner;
+
 public class ContaLista1 {
 	
 	private String numeroAgencia;
@@ -19,16 +21,27 @@ public class ContaLista1 {
 		this.saldo = saldo;
 	}
 	
+	public void cadastrarConta() {
+		Scanner input = new Scanner(System.in);
+		this.numeroAgencia = "123-7";
+		System.out.println("Informe numero da conta: ");
+		this.numeroConta = input.nextLine();
+		System.out.println("Informe o valor do deposito de abertura: ");
+		this.saldo = input.nextDouble();
+	}
+	
 	public double sacarValor(double valorSaque) {
 		double valorSacado = 0;
-		if (valorSaque <= this.saldo) {
-			this.saldo -= valorSaque;
-			valorSacado = valorSaque;
-			}  else {
-				valorSaque = this.saldo;
-				this.saldo -= this.saldo;
-				valorSacado = valorSaque;
-			}
+//		if (valorSaque <= this.saldo) {
+//			this.saldo -= valorSaque;
+//			valorSacado = valorSaque;
+//			}  else {
+//				valorSaque = this.saldo;
+//				this.saldo -= this.saldo;
+//				valorSacado = valorSaque;
+//			}
+		this.saldo -= valorSaque;
+		valorSacado = valorSaque;
 			return valorSacado;
 		}
 	
@@ -60,6 +73,11 @@ public class ContaLista1 {
 	}
 	public double getSaldo() {
 		return saldo;
+	}
+
+	@Override
+	public String toString() {
+		return "Agencia: " + numeroAgencia + " Conta: " + numeroConta;
 	}
 
 		

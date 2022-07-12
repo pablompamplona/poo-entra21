@@ -1,19 +1,43 @@
 package entidade;
 
-public class Pessoa {
+import java.util.ArrayList;
+
+public class PessoaFisicaLista1 extends PessoaLista1 {
 	
-	private String nome;
+
 	private String dataNascimento;
 	private String cpf;
 	private char sexo;
 	
+			
 	//Construtores
-	public Pessoa(String nomeDaPessoa, String cpf) {
-		this.nome = nomeDaPessoa;
-		this.cpf = cpf;
+	public PessoaFisicaLista1() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
-	//Metodos
+
+	public PessoaFisicaLista1(String nome, boolean adimplente, String dataNascimento, String cpf, char sexo) {
+		super(nome, adimplente);
+		this.dataNascimento = dataNascimento;
+		this.cpf = cpf;
+		this.sexo = sexo;
+	}
+
+
+	public boolean verificarAdimplencia() {
+		double saldoGeral = 0;
+		for (int i = 0; i < super.getContas().size(); i++) {
+			saldoGeral += super.getContas().get(i).getSaldo();
+		}
+		if (saldoGeral < (-500.0)) {
+			super.setAdimplente(false);	
+		}else {
+			super.setAdimplente(true);
+		}
+		return super.isAdimplente();
+	}
+
 	public int calcularIdade(int anoAtual) {
 		int idade = 0;
 		//Assumir dd/MM/yyyy
@@ -24,12 +48,7 @@ public class Pessoa {
 	}
 	
 	//getters and Setters
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+
 	public String getDataNascimento() {
 		return dataNascimento;
 	}

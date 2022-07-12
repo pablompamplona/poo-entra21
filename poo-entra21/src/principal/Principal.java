@@ -8,7 +8,7 @@ import entidade.Diretor;
 import entidade.Endereco;
 import entidade.Funcionario;
 import entidade.Gerente;
-import entidade.Pessoa;
+import entidade.PessoaFisicaLista1;
 
 public class Principal {
 
