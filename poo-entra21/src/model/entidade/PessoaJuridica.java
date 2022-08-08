@@ -1,21 +1,21 @@
-package entidade;
+package model.entidade;
 
 import java.util.ArrayList;
 
-public class PessoaJuridicaLista1 extends PessoaLista1 {
+public class PessoaJuridica extends Pessoa {
 	
 	private String cnpj;
 	private String dataAbertura;
-	private ArrayList<ContaLista1> contasPj = new ArrayList();
+	private ArrayList<Conta> contasPj = new ArrayList();
 	
 	
-	public PessoaJuridicaLista1() {
+	public PessoaJuridica() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 		
-	public PessoaJuridicaLista1(String nome, boolean adimplente, String cnpj, String dataAbertura) {
+	public PessoaJuridica(String nome, boolean adimplente, String cnpj, String dataAbertura) {
 		super(nome, adimplente);
 		this.cnpj = cnpj;
 		this.dataAbertura = dataAbertura;

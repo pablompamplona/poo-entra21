@@ -1,4 +1,4 @@
-package entidade;
+package model.entidade;
 
 public class Gerente extends Funcionario {
 	

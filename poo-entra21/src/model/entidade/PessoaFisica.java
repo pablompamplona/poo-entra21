@@ -1,8 +1,8 @@
-package entidade;
+package model.entidade;
 
 import java.util.ArrayList;
 
-public class PessoaFisicaLista1 extends PessoaLista1 {
+public class PessoaFisica extends Pessoa {
 	
 
 	private String dataNascimento;
@@ -11,13 +11,13 @@ public class PessoaFisicaLista1 extends PessoaLista1 {
 	
 			
 	//Construtores
-	public PessoaFisicaLista1() {
+	public PessoaFisica() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
 
-	public PessoaFisicaLista1(String nome, boolean adimplente, String dataNascimento, String cpf, char sexo) {
+	public PessoaFisica(String nome, boolean adimplente, String dataNascimento, String cpf, char sexo) {
 		super(nome, adimplente);
 		this.dataNascimento = dataNascimento;
 		this.cpf = cpf;

@@ -1,20 +1,20 @@
-package entidade;
+package model.entidade;
 
 import java.util.Scanner;
 
-public class ContaLista1 {
+public class Conta {
 	
 	private String numeroAgencia;
 	private String numeroConta;
 	private double saldo;
 	
 	
-	public ContaLista1() {
+	public Conta() {
 		super();
 		
 	}
 
-	public ContaLista1(String numeroAgencia, String numeroConta, double saldo) {
+	public Conta(String numeroAgencia, String numeroConta, double saldo) {
 		super();
 		this.numeroAgencia = numeroAgencia;
 		this.numeroConta = numeroConta;

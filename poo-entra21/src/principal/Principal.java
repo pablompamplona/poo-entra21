@@ -3,12 +3,12 @@ package principal;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import entidade.ChefeDeSecao;
-import entidade.Diretor;
-import entidade.Endereco;
-import entidade.Funcionario;
-import entidade.Gerente;
-import entidade.PessoaFisicaLista1;
+import model.entidade.ChefeDeSecao;
+import model.entidade.Diretor;
+import model.entidade.Endereco;
+import model.entidade.Funcionario;
+import model.entidade.Gerente;
+import model.entidade.PessoaFisica;
 
 public class Principal {
 

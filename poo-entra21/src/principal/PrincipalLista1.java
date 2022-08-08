@@ -2,33 +2,33 @@ package principal;
 
 import java.util.ArrayList;
 
-import entidade.ContaLista1;
-import entidade.PessoaFisicaLista1;
-import entidade.PessoaJuridicaLista1;
-import entidade.PessoaLista1;
+import model.entidade.Conta;
+import model.entidade.PessoaFisica;
+import model.entidade.PessoaJuridica;
+import model.entidade.Pessoa;
 
 public class PrincipalLista1 {
 
 	public static void main(String[] args) {
 		
-		ContaLista1 conta1 = new ContaLista1("123-7", "12345-6", 600.0);
-		ContaLista1 conta2 = new ContaLista1("123-7", "9876-5", -600.0);
-		ContaLista1 conta3 = new ContaLista1("123-7", "6543-2", -1200.0);
-		ContaLista1 conta4 = new ContaLista1("123-7", "7878-9", 500.0);
-		ContaLista1 conta5 = new ContaLista1("123-7", "7979-0", -1200.0);
-		ContaLista1 conta6 = new ContaLista1("123-7", "7777-8", 300.0);
+		Conta conta1 = new Conta("123-7", "12345-6", 600.0);
+		Conta conta2 = new Conta("123-7", "9876-5", -600.0);
+		Conta conta3 = new Conta("123-7", "6543-2", -1200.0);
+		Conta conta4 = new Conta("123-7", "7878-9", 500.0);
+		Conta conta5 = new Conta("123-7", "7979-0", -1200.0);
+		Conta conta6 = new Conta("123-7", "7777-8", 300.0);
 		
-		PessoaLista1 titular1 = new PessoaFisicaLista1("Joao", true, "24/07/1980", "123456789-00", 'm');
-		PessoaLista1 titular2 = new PessoaJuridicaLista1("Empresa XYZ Ltda", false, "22333444000199", "19/11/2001");
+		Pessoa titular1 = new PessoaFisica("Joao", true, "24/07/1980", "123456789-00", 'm');
+		Pessoa titular2 = new PessoaJuridica("Empresa XYZ Ltda", false, "22333444000199", "19/11/2001");
 		
-		ArrayList <ContaLista1> contas = new ArrayList();
+		ArrayList <Conta> contas = new ArrayList();
 		contas.add(conta1);
 		contas.add(conta2);
 		contas.add(conta3);
 		
 		titular1.setContas(contas);
 		
-		ArrayList <ContaLista1> contasPj = new ArrayList();
+		ArrayList <Conta> contasPj = new ArrayList();
 		contasPj.add(conta4);
 		contasPj.add(conta5);
 		contasPj.add(conta6);
