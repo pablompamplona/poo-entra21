@@ -68,7 +68,7 @@ public class PessoaFisicaRepository {
 		ResultSet resultado;
 		PessoaFisica pf = new PessoaFisica();
 		try {
-			resultado = stmt.executeQuery("select * from pessoas_fisicas WHERE ID_PF= " + id);
+			resultado = stmt.executeQuery(query);
 			pf.setNome(resultado.getString(2));
 			pf.setCpf(resultado.getString(3));
 			pf.setDataNascimento(resultado.getDate(4));
