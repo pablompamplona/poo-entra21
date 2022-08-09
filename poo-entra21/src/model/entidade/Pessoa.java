@@ -14,10 +14,11 @@ public abstract class Pessoa {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Pessoa(String nome, boolean adimplente) {
+	public Pessoa(String nome) {
 		super();
+		this.adimplente = isAdimplente();
 		this.nome = nome;
-		this.adimplente = adimplente;
+		
 	}
 
 

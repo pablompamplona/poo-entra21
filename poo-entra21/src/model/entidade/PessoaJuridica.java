@@ -15,11 +15,11 @@ public class PessoaJuridica extends Pessoa {
 	}
 
 		
-	public PessoaJuridica(String nome, boolean adimplente, String cnpj, String dataAbertura) {
-		super(nome, adimplente);
-		this.cnpj = cnpj;
-		this.dataAbertura = dataAbertura;
-	}
+//	public PessoaJuridica(String nome, boolean adimplente, String cnpj, String dataAbertura) {
+//		super(nome, adimplente);
+//		this.cnpj = cnpj;
+//		this.dataAbertura = dataAbertura;
+//	}
 
 	public boolean verificarAdimplencia() {
 		double saldoGeral = 0;

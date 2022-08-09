@@ -1,13 +1,18 @@
 package model.entidade;
 
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class PessoaFisica extends Pessoa {
 	
-
-	private String dataNascimento;
 	private String cpf;
-	private char sexo;
+	private Date dataNascimento;
+	private String sexo;
+	
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	
 			
 	//Construtores
@@ -16,14 +21,12 @@ public class PessoaFisica extends Pessoa {
 		// TODO Auto-generated constructor stub
 	}
 	
-
-	public PessoaFisica(String nome, boolean adimplente, String dataNascimento, String cpf, char sexo) {
-		super(nome, adimplente);
-		this.dataNascimento = dataNascimento;
+	public PessoaFisica(String nome, String cpf, Date dataNascimento, String sexo) throws ParseException {
+		super(nome);
 		this.cpf = cpf;
+		this.dataNascimento = dataNascimento;
 		this.sexo = sexo;
 	}
-
 
 	public boolean verificarAdimplencia() {
 		double saldoGeral = 0;
@@ -38,21 +41,19 @@ public class PessoaFisica extends Pessoa {
 		return super.isAdimplente();
 	}
 
-	public int calcularIdade(int anoAtual) {
-		int idade = 0;
-		//Assumir dd/MM/yyyy
-		String anoNascimento = this.dataNascimento.substring(6);
-		idade = anoAtual - Integer.valueOf(anoNascimento);
-		
+	public int calcularIdade(PessoaFisica pessoa) {
+		Calendar dataNascimento = Calendar.getInstance();
+		dataNascimento.setTime(pessoa.getDataNascimento());
+		Calendar hoje = Calendar.getInstance();
+		int idade = dataNascimento.get(Calendar.YEAR) - hoje.get(Calendar.YEAR);
 		return idade;
 	}
 	
 	//getters and Setters
-
-	public String getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
-	public void setDataNascimento(String dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	public String getCpf() {
@@ -61,12 +62,21 @@ public class PessoaFisica extends Pessoa {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public char getSexo() {
+	public String getSexo() {
 		return sexo;
 	}
-	public void setSexo(char sexo) {
+	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
+	
+	@Override
+	public String toString() {
+		return "Nome: " + getNome() + "\n" +
+				"CPF: " + cpf + "\n" +
+//				"Data de Nascimento: " + dataNascimento + "\n" +
+				"Sexo: " + sexo;
+	}
+	
 	
 	
 
