@@ -12,7 +12,7 @@ public class PrincipalConta {
 	public static void main(String[] args) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		
-		PessoaFisica titular1 = new PessoaFisica("juca", "12345678900", sdf.parse("24-07-1980"), "M");
+		PessoaFisica titular1 = new PessoaFisica("juca", "00443990905", sdf.parse("24-07-1980"), "M");
 		PessoaFisicaRepository pfr = new PessoaFisicaRepository();
 		pfr.inserirPessoaFisica(titular1);
 		

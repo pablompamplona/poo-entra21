@@ -20,7 +20,7 @@ public class PessoaFisicaRepository {
 	//create
 	public Pessoa inserirPessoaFisica(PessoaFisica novaPessoaFisica) {
 		Connection conm = Banco.getConnection();
-		String query = "INSERT INTO pessoas_fisicas (nome, cpf, data_nascto, sexo, adimplente) VALUES (?, ?, ?, ?, ?)";
+		String query = "INSERT INTO pessoas_fisicas (nome, cpf, data_nascto, sexo, adimplente) VALUES (?, ? , ?, ?, ?)";
 		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
 		
 		
@@ -30,7 +30,7 @@ public class PessoaFisicaRepository {
 			stmt.setDate(3, new Date(novaPessoaFisica.getDataNascimento().getTime()));
 			stmt.setString(4, novaPessoaFisica.getSexo());
 			stmt.setBoolean(5, true);
-			stmt.executeUpdate(query);
+			stmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Erro de insercao no Banco: " + e.getMessage());
 		}
@@ -63,12 +63,13 @@ public class PessoaFisicaRepository {
 	
 	public PessoaFisica consultarPessoaFisica (int id) {
 		Connection conm = Banco.getConnection();
-		String query = "select * from pessoas_fisicas where id_pf = " + id;
+		String query = "select * from pessoas_fisicas where id_pf = ?";
 		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
-		ResultSet resultado;
+		ResultSet resultado = null;
 		PessoaFisica pf = new PessoaFisica();
 		try {
-			resultado = stmt.executeQuery(query);
+			stmt.setInt(1, id);
+			resultado = stmt.executeQuery();
 			pf.setNome(resultado.getString(2));
 			pf.setCpf(resultado.getString(3));
 			pf.setDataNascimento(resultado.getDate(4));
@@ -76,7 +77,7 @@ public class PessoaFisicaRepository {
 			pf.setAdimplente(resultado.getBoolean(6));
 		}
 		catch (SQLException e) {
-			System.out.println("Erro de Consulta no BD: " + e.getCause());
+			System.out.println("Erro de Consulta no BD: " + e.getMessage());
 		}
 		return pf;
 	}
