@@ -2,25 +2,48 @@ package principal;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Scanner;
 
+import model.entidade.ContaFisica;
 import model.entidade.PessoaFisica;
+import model.entidade.PessoaJuridica;
+import model.entidade.enums.TipoConta;
+import model.repository.ContaFisicaRepository;
 import model.repository.PessoaFisicaRepository;
+import model.repository.PessoaJuridicaRepository;
 
 
 public class PrincipalConta {
 
 	public static void main(String[] args) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-		
-		PessoaFisica titular1 = new PessoaFisica("juca", "00443990905", sdf.parse("24-07-1980"), "M");
+		Scanner input = new Scanner(System.in);
+		PessoaFisica titular1 = new PessoaFisica("matheus", "59989023500", sdf.parse("25-07-1990"), "M");
+		PessoaJuridica empresa1 = new PessoaJuridica("comercial fulanos", "98765432000200", sdf.parse("15-08-2010"));
 		PessoaFisicaRepository pfr = new PessoaFisicaRepository();
-		pfr.inserirPessoaFisica(titular1);
+		PessoaJuridicaRepository pjr = new PessoaJuridicaRepository();
+		ContaFisicaRepository cfr = new ContaFisicaRepository();
+		ContaFisica conta1 = new ContaFisica("123-4", "5002-1", TipoConta.FISICA, titular1);
+//		cfr.inserirContaFisica(conta1);
+//		System.out.println(pfr.inserirPessoaFisica(titular1));
+//		pjr.inserirPessoaJuridica(empresa1);
+//		
+//		System.out.println(pfr.listarPessoaFisica());
+//		System.out.println();
+//		System.out.println(pjr.listarPessoaJuridica());
+//		System.out.println(pjr.consultarPessoaJuridica(1));
+//		System.out.println(pjr.alterarPessoaJuridica(empresa1, 1));
+//		System.out.println();
+//		System.out.print("id para consulta: ");
+//		int id = input.nextInt();
+//		System.out.println(pfr.consultarPessoaFisica(id));
+//		System.out.print("id para excluir: ");
+//		id = input.nextInt();
+//		System.out.println(pfr.excluirPessoaFisica(id));
 		
-		System.out.println(pfr.listarPessoaFisica());
-		
-		System.out.println();
-		
-		System.out.println(pfr.consultarPessoaFisica(2));
+//		System.out.println(pfr.alterarPessoaFisica(titular1, 1));
+//		
+		System.out.println(cfr.listarContasFisicas());
 		
 		
 		

@@ -2,33 +2,40 @@ package model.entidade;
 
 import java.util.Scanner;
 
-public class Conta {
+import model.entidade.enums.TipoConta;
+
+public abstract class Conta {
 	
 	private String numeroAgencia;
 	private String numeroConta;
+	private TipoConta tipo;
 	private double saldo;
 	
 	
+
 	public Conta() {
 		super();
-		
+		// TODO Auto-generated constructor stub
 	}
+	
+	
 
-	public Conta(String numeroAgencia, String numeroConta, double saldo) {
+	public Conta(String numeroAgencia, String numeroConta, TipoConta tipo) {
 		super();
 		this.numeroAgencia = numeroAgencia;
 		this.numeroConta = numeroConta;
-		this.saldo = saldo;
+		this.tipo = tipo;
+		
 	}
-	
-	public void cadastrarConta() {
-		Scanner input = new Scanner(System.in);
-		this.numeroAgencia = "123-7";
-		System.out.println("Informe numero da conta: ");
-		this.numeroConta = input.nextLine();
-		System.out.println("Informe o valor do deposito de abertura: ");
-		this.saldo = input.nextDouble();
-	}
+
+//	public void cadastrarConta() {
+//		Scanner input = new Scanner(System.in);
+//		this.numeroAgencia = "123-7";
+//		System.out.println("Informe numero da conta: ");
+//		this.numeroConta = input.nextLine();
+//		System.out.println("Informe o valor do deposito de abertura: ");
+//		this.saldo = input.nextDouble();
+//	}
 	
 	public double sacarValor(double valorSaque) {
 		double valorSacado = 0;
@@ -74,6 +81,18 @@ public class Conta {
 	public double getSaldo() {
 		return saldo;
 	}
+
+	public TipoConta getTipo() {
+		return tipo;
+	}
+
+
+
+	public void setTipo(TipoConta tipo) {
+		this.tipo = tipo;
+	}
+
+
 
 	@Override
 	public String toString() {

@@ -8,6 +8,7 @@ import java.util.List;
 
 public class PessoaFisica extends Pessoa {
 	
+	private int idPf;
 	private String cpf;
 	private Date dataNascimento;
 	private String sexo;
@@ -49,6 +50,14 @@ public class PessoaFisica extends Pessoa {
 		return idade;
 	}
 	
+	public int getIdPf() {
+		return idPf;
+	}
+
+	public void setIdPf(int idPf) {
+		this.idPf = idPf;
+	}
+
 	//getters and Setters
 	public Date getDataNascimento() {
 		return dataNascimento;
@@ -69,13 +78,14 @@ public class PessoaFisica extends Pessoa {
 		this.sexo = sexo;
 	}
 	
-	@Override
-	public String toString() {
-		return "Nome: " + getNome() + "\n" +
-				"CPF: " + cpf + "\n" +
-//				"Data de Nascimento: " + dataNascimento + "\n" +
-				"Sexo: " + sexo;
-	}
+		@Override
+		public String toString() {
+			return "ID: " + idPf + "\n" +
+					"Nome: " + getNome() + "\n" +
+					"CPF: " + cpf + "\n" +
+					"Data de Nascimento: " + sdf.format(dataNascimento) + "\n" +
+					"Sexo: " + sexo;
+		}
 	
 	
 	

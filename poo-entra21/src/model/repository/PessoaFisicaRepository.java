@@ -18,10 +18,10 @@ import model.entidade.PessoaFisica;
 public class PessoaFisicaRepository {
 	
 	//create
-	public Pessoa inserirPessoaFisica(PessoaFisica novaPessoaFisica) {
+	public PessoaFisica inserirPessoaFisica(PessoaFisica novaPessoaFisica) {
 		Connection conm = Banco.getConnection();
 		String query = "INSERT INTO pessoas_fisicas (nome, cpf, data_nascto, sexo, adimplente) VALUES (?, ? , ?, ?, ?)";
-		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
+		PreparedStatement stmt = Banco.getPreparedStatementWithPk(conm, query);
 		
 		
 		try {
@@ -44,9 +44,10 @@ public class PessoaFisicaRepository {
 		PreparedStatement stmt = Banco.getPreparedStatement(conm, "select * from pessoas_fisicas;");
 		ResultSet resultado;
 		try {
-			resultado = stmt.executeQuery("select * from pessoas_fisicas;");
+			resultado = stmt.executeQuery();
 			while (resultado.next()) {
 				PessoaFisica pf = new PessoaFisica();
+				pf.setIdPf(resultado.getInt(1));
 				pf.setNome(resultado.getString(2));
 				pf.setCpf(resultado.getString(3));
 				pf.setDataNascimento(resultado.getDate(4));
@@ -70,11 +71,14 @@ public class PessoaFisicaRepository {
 		try {
 			stmt.setInt(1, id);
 			resultado = stmt.executeQuery();
-			pf.setNome(resultado.getString(2));
-			pf.setCpf(resultado.getString(3));
-			pf.setDataNascimento(resultado.getDate(4));
-			pf.setSexo(resultado.getString(5));
-			pf.setAdimplente(resultado.getBoolean(6));
+			if (resultado != null && resultado.next()) {
+				pf.setIdPf(resultado.getInt(1));
+				pf.setNome(resultado.getString(2));
+				pf.setCpf(resultado.getString(3));
+				pf.setDataNascimento(resultado.getDate(4));
+				pf.setSexo(resultado.getString(5));
+				pf.setAdimplente(resultado.getBoolean(6));
+			}	
 		}
 		catch (SQLException e) {
 			System.out.println("Erro de Consulta no BD: " + e.getMessage());
@@ -83,14 +87,38 @@ public class PessoaFisicaRepository {
 	}
 	
 	//update
-	public Pessoa alterarPessoaFisica (int id) {
+	public Pessoa alterarPessoaFisica (PessoaFisica novaPessoaFisica, int id) {
+		Connection conm = Banco.getConnection();
+		String query = "UPDATE pessoas_fisicas SET nome = ?,cpf = ?,data_nascto = ?,sexo = ? WHERE id_pf = ?";
+		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
 		
-		return null;
+		try {
+			stmt.setString(1, novaPessoaFisica.getNome());
+			stmt.setString(2, novaPessoaFisica.getCpf());
+			stmt.setDate(3, new Date(novaPessoaFisica.getDataNascimento().getTime()));
+			stmt.setString(4, novaPessoaFisica.getSexo());
+			stmt.setInt(5, id);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Erro de insercao no Banco: " + e.getMessage());
+		}
+		
+		return novaPessoaFisica;
 	}
 	
 	//delete
 	public boolean excluirPessoaFisica (int id) {
+		Connection conm = Banco.getConnection();
+		String query = "DELETE FROM pessoas_fisicas WHERE id_pf = ?";
+		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
+		try {
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			System.out.println("Erro de Exclusao no BD: " + e.getMessage());
+			return false;
+		}
 		
-		return false;
 	}
 }
