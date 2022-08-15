@@ -111,14 +111,16 @@ public class ContaJuridicaRepository {
 	
 	//delete
 	public boolean excluirContaJuridica(int id) {
+		boolean excluiu = false;
 		Connection conm = Banco.getConnection();
 		String query = "DELETE FROM contas_pj WHERE id_contas_pj = ?";
 		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
 		
 		try {
 			stmt.setInt(1, id);
-			stmt.executeUpdate();
-			return true;
+			int registrosExcluidos = stmt.executeUpdate();
+			excluiu = (registrosExcluidos > 0);
+			return excluiu;
 		} 
 		catch (SQLException e) {
 			System.out.println("Erro de Exclusao no BD: " + e.getMessage());
