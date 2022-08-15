@@ -36,6 +36,10 @@ public class PessoaJuridicaRepository {
 			} catch (SQLException e) {
 				System.out.println("Erro de insercao no Banco: " + e.getMessage());
 			}
+			finally {
+				Banco.closePreparedStatement(stmt);
+				Banco.closeConnection(conm);
+			}
 			return novaPessoaJuridica;
 		}
 		
@@ -57,8 +61,13 @@ public class PessoaJuridicaRepository {
 					pj.setAdimplente(resultado.getBoolean(5));
 					listaResult.add(pj);
 				}
-			} catch (SQLException e) {
+			} 
+			catch (SQLException e) {
 				System.out.println("Erro de Consulta no BD: " + e.getMessage());
+			}
+			finally {
+				Banco.closePreparedStatement(stmt);
+				Banco.closeConnection(conm);
 			}
 			
 			return (listaResult);
@@ -81,8 +90,13 @@ public class PessoaJuridicaRepository {
 					pj.setDataAbertura(resultado.getDate(4));
 					pj.setAdimplente(resultado.getBoolean(5));
 				}
-			} catch (SQLException e) {
+			} 
+			catch (SQLException e) {
 				System.out.println("Erro de Consulta no BD: " + e.getMessage());
+			}
+			finally {
+				Banco.closePreparedStatement(stmt);
+				Banco.closeConnection(conm);
 			}
 			return pj;
 		}
@@ -99,25 +113,37 @@ public class PessoaJuridicaRepository {
 				stmt.setDate(3, new Date(novaPessoaJuridica.getDataAbertura().getTime()));
 				stmt.setInt(4, id);
 				stmt.executeUpdate();
-			} catch (SQLException e) {
+			} 
+			catch (SQLException e) {
 				System.out.println("Erro de insercao no Banco: " + e.getMessage());
+			}
+			finally {
+				Banco.closePreparedStatement(stmt);
+				Banco.closeConnection(conm);
 			}
 			return novaPessoaJuridica;
 		}
 		
 		//delete
 		public boolean excluirPessoaJuridica (int id) {
+			boolean excluiu = false;
 			Connection conm = Banco.getConnection();
-			String query = "DELETE FROM pessoas_juridicas WHERE id_pf = ?";
+			String query = "DELETE FROM pessoas_juridicas WHERE id_pj = ?";
 			PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
 			
 			try {
 				stmt.setInt(1, id);
-				stmt.executeUpdate();
-				return true;
-			} catch (SQLException e) {
+				int registrosExcluidos = stmt.executeUpdate();
+				excluiu = (registrosExcluidos > 0);
+				return excluiu;
+			} 
+			catch (SQLException e) {
 				System.out.println("Erro de Exclusao no BD: " + e.getMessage());
 				return false;
+			}
+			finally {
+				Banco.closePreparedStatement(stmt);
+				Banco.closeConnection(conm);
 			}
 			
 		}

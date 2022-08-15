@@ -35,7 +35,7 @@ public class PrincipalConta {
 		 */
 //		System.out.println(pfr.inserirPessoaFisica(titular1));
 //		
-		System.out.println(pjr.inserirPessoaJuridica(empresa1));
+//		System.out.println(pjr.inserirPessoaJuridica(empresa1));
 		
 		
 		/* LISTAR PESSOAS FISICAS E JURIDICAS  
@@ -65,7 +65,7 @@ public class PrincipalConta {
 //		int id = input.nextInt();
 //		System.out.println(pfr.excluirPessoaFisica(id));
 //		System.out.print("id para excluir: ");
-//		id = input.nextInt();
+//		int id = input.nextInt();
 //		System.out.println(pjr.excluirPessoaJuridica(id));
 
 		

@@ -34,8 +34,13 @@ public class ContaJuridicaRepository {
 			if(resultado.next()) {
 				novaContaJuridica.setIdContaJuridica(resultado.getInt(1));
 			}
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
 			System.out.println("Erro de insercao no Banco: " + e.getMessage());
+		}
+		finally {
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conm);
 		}
 		return novaContaJuridica;
 	}
@@ -58,8 +63,13 @@ public class ContaJuridicaRepository {
 				conta.setIdTitular(resultado.getInt(5));
 				listaResult.add(conta);
 			}
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
 			System.out.println("Erro de Consulta no BD: " + e.getMessage());
+		}
+		finally {
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conm);
 		}
 		return (listaResult);
 	}
@@ -81,8 +91,13 @@ public class ContaJuridicaRepository {
 				conta.setTipo(TipoConta.valueOf(resultado.getString(4).toUpperCase()));
 				conta.setIdTitular(resultado.getInt(5));
 			}
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
 			System.out.println("Erro de Consulta no BD: " + e.getMessage());
+		}
+		finally {
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conm);
 		}
 		return conta;
 	}
@@ -104,9 +119,14 @@ public class ContaJuridicaRepository {
 			stmt.setInt(1, id);
 			stmt.executeUpdate();
 			return true;
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
 			System.out.println("Erro de Exclusao no BD: " + e.getMessage());
 			return false;
+		}
+		finally {
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conm);
 		}
 		
 	}
