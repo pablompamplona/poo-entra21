@@ -18,6 +18,7 @@ import model.entidade.PessoaFisica;
 public class PessoaFisicaRepository {
 	
 	//create
+	//TODO recuperar id_pf
 	public PessoaFisica inserirPessoaFisica(PessoaFisica novaPessoaFisica) {
 		Connection conm = Banco.getConnection();
 		String query = "INSERT INTO pessoas_fisicas (nome, cpf, data_nascto, sexo, adimplente) VALUES (?, ? , ?, ?, ?)";
@@ -107,6 +108,7 @@ public class PessoaFisicaRepository {
 	}
 	
 	//delete
+	//TODO verificar se cliente é titular de conta
 	public boolean excluirPessoaFisica (int id) {
 		Connection conm = Banco.getConnection();
 		String query = "DELETE FROM pessoas_fisicas WHERE id_pf = ?";

@@ -15,6 +15,7 @@ import model.entidade.enums.TipoConta;
 public class ContaFisicaRepository {
 	
 	//create
+	//TODO recuperar id_conta_pf
 	public ContaFisica inserirContaFisica(ContaFisica novaContaFisica) {
 		Connection conm = Banco.getConnection();
 		String query = "INSERT INTO contas_pf (agencia,numero_conta,tipo_conta,id_pf) VALUES (?,?,?,?)";
@@ -23,7 +24,7 @@ public class ContaFisicaRepository {
 		try {
 			stmt.setString(1, novaContaFisica.getNumeroAgencia());
 			stmt.setString(2, novaContaFisica.getNumeroConta());
-			stmt.setString(3, novaContaFisica.getTipo().name());
+			stmt.setString(3, novaContaFisica.getTipo().toString());
 			stmt.setInt(4, novaContaFisica.getTitular().getIdPf());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -46,7 +47,7 @@ public class ContaFisicaRepository {
 				conta.setIdContaFisica(resultado.getInt(1));
 				conta.setNumeroAgencia(resultado.getString(2));
 				conta.setNumeroConta(resultado.getString(3));
-//				conta.setTipo(resultado.getString(4));
+				conta.setTipo(TipoConta.valueOf(resultado.getString(4).toUpperCase()));
 				conta.setIdTitular(resultado.getInt(5));
 				listaResult.add(conta);
 			}
@@ -56,7 +57,31 @@ public class ContaFisicaRepository {
 		return (listaResult);
 	}
 	
+	public ContaFisica consultarContaFisica(int id) {
+		Connection conm = Banco.getConnection();
+		String query = "select * from contas_pf where id_pf = ?";
+		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
+		ResultSet resultado = null;
+		ContaFisica conta = new ContaFisica();
+		try {
+			stmt.setInt(1, id);
+			resultado = stmt.executeQuery();
+			if (resultado != null && resultado.next()) {
+				conta.setIdContaFisica(resultado.getInt(1));
+				conta.setNumeroAgencia(resultado.getString(2));
+				conta.setNumeroConta(resultado.getString(3));
+				conta.setTipo(TipoConta.valueOf(resultado.getString(4).toUpperCase()));
+				conta.setIdTitular(resultado.getInt(5));
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro de Consulta no BD: " + e.getMessage());
+		}
+		
+		return conta;
+	}
+	
 	//update
+	// TODO verificar quais campos alterar >> titular?
 	public Conta alterarContaFisica(int id) {
 		
 		return null;
@@ -64,8 +89,20 @@ public class ContaFisicaRepository {
 	
 	//delete
 	public boolean excluirContaFisica(int id) {
+		Connection conm = Banco.getConnection();
+		String query = "DELETE FROM contas_pf WHERE id_contas_pf = ?";
+		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
 		
-		return false;
+		try {
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			System.out.println("Erro de Exclusao no BD: " + e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+	
 	}
 
 }

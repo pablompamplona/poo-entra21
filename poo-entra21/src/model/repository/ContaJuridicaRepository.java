@@ -1,34 +1,107 @@
 package model.repository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import model.Banco;
 import model.entidade.Conta;
+import model.entidade.ContaFisica;
 import model.entidade.ContaJuridica;
+import model.entidade.enums.TipoConta;
 
 public class ContaJuridicaRepository {
 	
 	//create
-		public ContaJuridica inserirContaJuridica(ContaJuridica novaContaJuridica) {
-			
-			return novaContaJuridica;
-		}
+	//TODO recuperar id_conta_pj
+	public ContaJuridica inserirContaJuridica(ContaJuridica novaContaJuridica) {
+		Connection conm = Banco.getConnection();
+		String query = "INSERT INTO contas_pj (agencia,numero_conta,tipo_conta,id_pj) VALUES (?,?,?,?)";
+		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
 		
-		//retrieve
-		public ArrayList<ContaJuridica> listarContasJuridicas() {
-			
-			return null;
+		try {
+			stmt.setString(1, novaContaJuridica.getNumeroAgencia());
+			stmt.setString(2, novaContaJuridica.getNumeroConta());
+			stmt.setString(3, novaContaJuridica.getTipo().toString());
+			stmt.setInt(4, novaContaJuridica.getTitular().getIdPj());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Erro de insercao no Banco: " + e.getMessage());
 		}
+		return novaContaJuridica;
+	}
+	
+	//retrieve
+	public ArrayList<ContaJuridica> listarContasJuridicas() {
+		ArrayList<ContaJuridica> listaResult = new ArrayList<>();
+		Connection conm = Banco.getConnection();
+		PreparedStatement stmt = Banco.getPreparedStatement(conm, "select * from contas_pj;");
+		ResultSet resultado;
 		
-		//update
-		public ContaJuridica alterarContaJuridica(int id) {
-			
-			return null;
+		try {
+			resultado = stmt.executeQuery();
+			while (resultado != null && resultado.next()) {
+				ContaJuridica conta = new ContaJuridica();
+				conta.setIdContaJuridica(resultado.getInt(1));
+				conta.setNumeroAgencia(resultado.getString(2));
+				conta.setNumeroConta(resultado.getString(3));
+				conta.setTipo(TipoConta.valueOf(resultado.getString(4).toUpperCase()));
+				conta.setIdTitular(resultado.getInt(5));
+				listaResult.add(conta);
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro de Consulta no BD: " + e.getMessage());
 		}
+		return (listaResult);
+	}
+	
+	public ContaJuridica consultarContaJuridica(int id) {
+		Connection conm = Banco.getConnection();
+		String query = "select * from contas_pj where id_contas_pj = ?";
+		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
+		ResultSet resultado = null;
+		ContaJuridica conta = new ContaJuridica();
 		
-		//delete
-		public boolean excluirContaJuridica(int id) {
-			
+		try {
+			stmt.setInt(1, id);
+			resultado = stmt.executeQuery();
+			if (resultado.next()) {
+				conta.setIdContaJuridica(resultado.getInt(1));
+				conta.setNumeroAgencia(resultado.getString(2));
+				conta.setNumeroConta(resultado.getString(3));
+				conta.setTipo(TipoConta.valueOf(resultado.getString(4).toUpperCase()));
+				conta.setIdTitular(resultado.getInt(5));
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro de Consulta no BD: " + e.getMessage());
+		}
+		return conta;
+	}
+	
+	//update
+	// TODO verificar quais campos alterar >> titular?
+	public ContaJuridica alterarContaJuridica(int id) {
+		
+		return null;
+	}
+	
+	//delete
+	public boolean excluirContaJuridica(int id) {
+		Connection conm = Banco.getConnection();
+		String query = "DELETE FROM contas_pj WHERE id_contas_pj = ?";
+		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
+		
+		try {
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			System.out.println("Erro de Exclusao no BD: " + e.getMessage());
 			return false;
 		}
+		
+	}
 
 }

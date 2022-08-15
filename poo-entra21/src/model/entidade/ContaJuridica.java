@@ -4,7 +4,9 @@ import model.entidade.enums.TipoConta;
 
 public class ContaJuridica extends Conta {
 	
+	private int idContaJuridica;
 	private PessoaJuridica titular;
+	private int idTitular;
 
 	
 	public ContaJuridica() {
@@ -28,9 +30,26 @@ public class ContaJuridica extends Conta {
 		this.titular = titular;
 	}
 	
+	public int getIdContaJuridica() {
+		return idContaJuridica;
+	}
+
+	public void setIdContaJuridica(int idContaJuridica) {
+		this.idContaJuridica = idContaJuridica;
+	}
+
+	public int getIdTitular() {
+		return idTitular;
+	}
+
+	public void setIdTitular(int idTitular) {
+		this.idTitular = idTitular;
+	}
+
 	@Override
 	public String toString() {
-		return "Agencia: " + getNumeroAgencia() + "\n" +
+		return "ID: " + idContaJuridica + "\n" +
+				"Agencia: " + getNumeroAgencia() + "\n" +
 				"Conta: " + getNumeroConta() + "\n" +
 				"Tipo: " + getTipo() + "\n" +
 				"Titular: " + titular;

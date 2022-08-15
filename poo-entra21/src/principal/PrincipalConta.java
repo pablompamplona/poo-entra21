@@ -5,10 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 import model.entidade.ContaFisica;
+import model.entidade.ContaJuridica;
 import model.entidade.PessoaFisica;
 import model.entidade.PessoaJuridica;
 import model.entidade.enums.TipoConta;
 import model.repository.ContaFisicaRepository;
+import model.repository.ContaJuridicaRepository;
 import model.repository.PessoaFisicaRepository;
 import model.repository.PessoaJuridicaRepository;
 
@@ -23,28 +25,71 @@ public class PrincipalConta {
 		PessoaFisicaRepository pfr = new PessoaFisicaRepository();
 		PessoaJuridicaRepository pjr = new PessoaJuridicaRepository();
 		ContaFisicaRepository cfr = new ContaFisicaRepository();
-		ContaFisica conta1 = new ContaFisica("123-4", "5002-1", TipoConta.FISICA, titular1);
-//		cfr.inserirContaFisica(conta1);
+		ContaFisica conta1 = new ContaFisica("123-4", "5003-1", TipoConta.FISICA, titular1);
+		ContaJuridicaRepository cjr = new ContaJuridicaRepository();
+		ContaJuridica conta2 = new ContaJuridica("123-4", "10001-0", TipoConta.JURIDICA, empresa1);
+		
+
+		
+		/* INSERIR PESSOA FISICA E JURIDICA
+		 */
 //		System.out.println(pfr.inserirPessoaFisica(titular1));
-//		pjr.inserirPessoaJuridica(empresa1);
 //		
+//		System.out.println(pjr.inserirPessoaJuridica(empresa1));
+		
+		
+		/* LISTAR PESSOAS FISICAS E JURIDICAS  
+		 */
 //		System.out.println(pfr.listarPessoaFisica());
 //		System.out.println();
 //		System.out.println(pjr.listarPessoaJuridica());
-//		System.out.println(pjr.consultarPessoaJuridica(1));
-//		System.out.println(pjr.alterarPessoaJuridica(empresa1, 1));
-//		System.out.println();
+		
+		/* CONSULTAR PESSOAS FISICAS E JURIDICAS POR ID
+		 */
 //		System.out.print("id para consulta: ");
 //		int id = input.nextInt();
 //		System.out.println(pfr.consultarPessoaFisica(id));
+//		System.out.print("id para consulta: ");
+//		id = input.nextInt();
+//		System.out.println(pjr.consultarPessoaJuridica(1));
+//		
+		/* ALTERAR PESSOA FISICA E JURIDICA
+		 */
+//		System.out.println(pjr.alterarPessoaJuridica(empresa1, 1));
+//		System.out.println();
+//		System.out.println(pfr.alterarPessoaFisica(titular1, 1));
+
+		/* EXCLUIR PESSOA FISICA E JURIDICA
+		 */
+//		System.out.print("id para excluir: ");
+//		int id = input.nextInt();
+//		System.out.println(pfr.excluirPessoaFisica(id));
 //		System.out.print("id para excluir: ");
 //		id = input.nextInt();
-//		System.out.println(pfr.excluirPessoaFisica(id));
+//		System.out.println(pjr.excluirPessoaJuridica(id));
+
 		
-//		System.out.println(pfr.alterarPessoaFisica(titular1, 1));
-//		
-		System.out.println(cfr.listarContasFisicas());
+		/* INSERIR CONTA FISICA E JURIDICA
+		 */
+//		System.out.println(cfr.inserirContaFisica(conta1));
+//		System.out.println(cjr.inserirContaJuridica(conta2));
 		
+		
+		/* LISTAR CONTAS FISICAS
+		 */
+//		System.out.println(cfr.listarContasFisicas());
+//		System.out.println(cjr.listarContasJuridicas());
+		
+		/* CONSULTAR PESSOAS FISICAS E JURIDICAS POR ID
+		 */
+//		System.out.println(cfr.consultarContaFisica(1));
+		System.out.println(cjr.consultarContaJuridica(2));
+		
+		
+		/* EXCLUIR CONTA FISICA
+		 */
+//		System.out.println(cfr.excluirContaFisica(2));
+//		System.out.println(cjr.excluirContaJuridica(1));
 		
 		
 //		Conta conta1 = new Conta("123-7", "12345-6", 600.0);

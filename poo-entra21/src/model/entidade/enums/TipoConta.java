@@ -5,4 +5,6 @@ public enum TipoConta {
 	FISICA,
 	JURIDICA;
 	
+	
+	
 }
