@@ -51,7 +51,8 @@ public class ContaFisica extends Conta{
 
 	@Override
 	public String toString() {
-		return "Agencia: " + getNumeroAgencia() + "\n" +
+		return "ID: " + idContaFisica + "\n" +
+				"Agencia: " + getNumeroAgencia() + "\n" +
 				"Conta: " + getNumeroConta() + "\n" +
 				"Tipo: " + getTipo() + "\n" +
 				"Titular: " + titular;

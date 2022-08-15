@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLType;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.Banco;
@@ -19,14 +20,20 @@ public class ContaFisicaRepository {
 	public ContaFisica inserirContaFisica(ContaFisica novaContaFisica) {
 		Connection conm = Banco.getConnection();
 		String query = "INSERT INTO contas_pf (agencia,numero_conta,tipo_conta,id_pf) VALUES (?,?,?,?)";
-		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
+		PreparedStatement stmt = Banco.getPreparedStatementWithPk(conm,query);
+		ResultSet resultado = null;
 		
 		try {
+			conm.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, novaContaFisica.getNumeroAgencia());
 			stmt.setString(2, novaContaFisica.getNumeroConta());
 			stmt.setString(3, novaContaFisica.getTipo().toString());
 			stmt.setInt(4, novaContaFisica.getTitular().getIdPf());
 			stmt.executeUpdate();
+			resultado = stmt.getGeneratedKeys();
+			if (resultado.next()) {
+				novaContaFisica.setIdContaFisica(resultado.getInt(1));
+			}
 		} catch (SQLException e) {
 			System.out.println("Erro de insercao no Banco: " + e.getMessage());
 		}

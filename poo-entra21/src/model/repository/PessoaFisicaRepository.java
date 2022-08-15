@@ -23,15 +23,20 @@ public class PessoaFisicaRepository {
 		Connection conm = Banco.getConnection();
 		String query = "INSERT INTO pessoas_fisicas (nome, cpf, data_nascto, sexo, adimplente) VALUES (?, ? , ?, ?, ?)";
 		PreparedStatement stmt = Banco.getPreparedStatementWithPk(conm, query);
-		
+		ResultSet resultado = null;
 		
 		try {
+			conm.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, novaPessoaFisica.getNome());
 			stmt.setString(2, novaPessoaFisica.getCpf());
 			stmt.setDate(3, new Date(novaPessoaFisica.getDataNascimento().getTime()));
 			stmt.setString(4, novaPessoaFisica.getSexo());
 			stmt.setBoolean(5, true);
 			stmt.executeUpdate();
+			resultado = stmt.getGeneratedKeys();
+			if(resultado.next()) {
+				novaPessoaFisica.setIdPf(resultado.getInt(1));
+			}
 		} catch (SQLException e) {
 			System.out.println("Erro de insercao no Banco: " + e.getMessage());
 		}

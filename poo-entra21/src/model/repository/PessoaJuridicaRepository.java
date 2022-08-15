@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.Banco;
@@ -18,14 +19,20 @@ public class PessoaJuridicaRepository {
 		public PessoaJuridica inserirPessoaJuridica(PessoaJuridica novaPessoaJuridica) {
 			Connection conm = Banco.getConnection();
 			String query = "INSERT INTO pessoas_juridicas (nome, cnpj, data_abertura, adimplente) VALUES (?,?,?,?)";
-			PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
+			PreparedStatement stmt = Banco.getPreparedStatementWithPk(conm, query);
+			ResultSet resultado = null;
 			
 			try {
+				conm.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 				stmt.setString(1, novaPessoaJuridica.getNome());
 				stmt.setString(2, novaPessoaJuridica.getCnpj());
 				stmt.setDate(3, new Date(novaPessoaJuridica.getDataAbertura().getTime()));
 				stmt.setBoolean(4, true);
 				stmt.executeUpdate();
+				resultado = stmt.getGeneratedKeys();
+				if (resultado.next()) {
+					novaPessoaJuridica.setIdPj(resultado.getInt(1));
+				}
 			} catch (SQLException e) {
 				System.out.println("Erro de insercao no Banco: " + e.getMessage());
 			}

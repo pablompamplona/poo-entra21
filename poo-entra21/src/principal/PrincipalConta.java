@@ -21,13 +21,13 @@ public class PrincipalConta {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		Scanner input = new Scanner(System.in);
 		PessoaFisica titular1 = new PessoaFisica("matheus", "59989023500", sdf.parse("25-07-1990"), "M");
-		PessoaJuridica empresa1 = new PessoaJuridica("comercial fulanos", "98765432000200", sdf.parse("15-08-2010"));
+		PessoaJuridica empresa1 = new PessoaJuridica("lanchonete pao com ovo", "98765432000300", sdf.parse("15-08-2010"));
 		PessoaFisicaRepository pfr = new PessoaFisicaRepository();
 		PessoaJuridicaRepository pjr = new PessoaJuridicaRepository();
 		ContaFisicaRepository cfr = new ContaFisicaRepository();
-		ContaFisica conta1 = new ContaFisica("123-4", "5003-1", TipoConta.FISICA, titular1);
+		ContaFisica conta1 = new ContaFisica("123-4", "5004-1", TipoConta.FISICA, titular1);
 		ContaJuridicaRepository cjr = new ContaJuridicaRepository();
-		ContaJuridica conta2 = new ContaJuridica("123-4", "10001-0", TipoConta.JURIDICA, empresa1);
+		ContaJuridica conta2 = new ContaJuridica("123-4", "10002-0", TipoConta.JURIDICA, empresa1);
 		
 
 		
@@ -35,7 +35,7 @@ public class PrincipalConta {
 		 */
 //		System.out.println(pfr.inserirPessoaFisica(titular1));
 //		
-//		System.out.println(pjr.inserirPessoaJuridica(empresa1));
+		System.out.println(pjr.inserirPessoaJuridica(empresa1));
 		
 		
 		/* LISTAR PESSOAS FISICAS E JURIDICAS  
@@ -83,7 +83,7 @@ public class PrincipalConta {
 		/* CONSULTAR PESSOAS FISICAS E JURIDICAS POR ID
 		 */
 //		System.out.println(cfr.consultarContaFisica(1));
-		System.out.println(cjr.consultarContaJuridica(2));
+//		System.out.println(cjr.consultarContaJuridica(2));
 		
 		
 		/* EXCLUIR CONTA FISICA
