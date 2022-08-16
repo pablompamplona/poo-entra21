@@ -11,6 +11,7 @@ import model.Banco;
 import model.entidade.Conta;
 import model.entidade.ContaFisica;
 import model.entidade.ContaJuridica;
+import model.entidade.PessoaJuridica;
 import model.entidade.enums.TipoConta;
 
 public class ContaJuridicaRepository {
@@ -56,11 +57,14 @@ public class ContaJuridicaRepository {
 			resultado = stmt.executeQuery();
 			while (resultado != null && resultado.next()) {
 				ContaJuridica conta = new ContaJuridica();
-				conta.setIdContaJuridica(resultado.getInt(1));
-				conta.setNumeroAgencia(resultado.getString(2));
-				conta.setNumeroConta(resultado.getString(3));
-				conta.setTipo(TipoConta.valueOf(resultado.getString(4).toUpperCase()));
-				conta.setIdTitular(resultado.getInt(5));
+				conta.setIdContaJuridica(resultado.getInt("id_contas_pj"));
+				conta.setNumeroAgencia(resultado.getString("agencia"));
+				conta.setNumeroConta(resultado.getString("numero_conta"));
+				conta.setTipo(TipoConta.valueOf(resultado.getString("tipo_conta").toUpperCase()));
+				conta.setSaldo(resultado.getDouble("saldo"));
+				PessoaJuridicaRepository pjr = new PessoaJuridicaRepository();
+				PessoaJuridica titular = pjr.consultarPessoaJuridica(resultado.getInt("id_pj"));
+				conta.setTitular(titular);
 				listaResult.add(conta);
 			}
 		} 
@@ -85,11 +89,14 @@ public class ContaJuridicaRepository {
 			stmt.setInt(1, id);
 			resultado = stmt.executeQuery();
 			if (resultado.next()) {
-				conta.setIdContaJuridica(resultado.getInt(1));
-				conta.setNumeroAgencia(resultado.getString(2));
-				conta.setNumeroConta(resultado.getString(3));
-				conta.setTipo(TipoConta.valueOf(resultado.getString(4).toUpperCase()));
-				conta.setIdTitular(resultado.getInt(5));
+				conta.setIdContaJuridica(resultado.getInt("id_contas_pj"));
+				conta.setNumeroAgencia(resultado.getString("agencia"));
+				conta.setNumeroConta(resultado.getString("numero_conta"));
+				conta.setTipo(TipoConta.valueOf(resultado.getString("tipo_conta").toUpperCase()));
+				conta.setSaldo(resultado.getDouble("saldo"));
+				PessoaJuridicaRepository pjr = new PessoaJuridicaRepository();
+				PessoaJuridica titular = pjr.consultarPessoaJuridica(resultado.getInt("id_pj"));
+				conta.setTitular(titular);
 			}
 		} 
 		catch (SQLException e) {

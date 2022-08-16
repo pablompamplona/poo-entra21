@@ -73,7 +73,7 @@ public class PessoaJuridicaRepository {
 			return (listaResult);
 		}
 		
-		public Pessoa consultarPessoaJuridica (int id) {
+		public PessoaJuridica consultarPessoaJuridica (int id) {
 			Connection conm = Banco.getConnection();
 			String query = "SELECT * FROM pessoas_juridicas where id_pj = ?";
 			PreparedStatement stmt = Banco.getPreparedStatement(conm, query);

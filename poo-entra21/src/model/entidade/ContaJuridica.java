@@ -6,8 +6,7 @@ public class ContaJuridica extends Conta {
 	
 	private int idContaJuridica;
 	private PessoaJuridica titular;
-	private int idTitular;
-
+	
 	
 	public ContaJuridica() {
 		super();
@@ -38,13 +37,6 @@ public class ContaJuridica extends Conta {
 		this.idContaJuridica = idContaJuridica;
 	}
 
-	public int getIdTitular() {
-		return idTitular;
-	}
-
-	public void setIdTitular(int idTitular) {
-		this.idTitular = idTitular;
-	}
 
 	@Override
 	public String toString() {

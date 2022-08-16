@@ -6,7 +6,7 @@ public class ContaFisica extends Conta{
 	
 	private int idContaFisica;
 	private PessoaFisica titular;
-	private int idTitular;
+
 	
 	
 
@@ -41,13 +41,7 @@ public class ContaFisica extends Conta{
 		this.titular = titular;
 	}
 	
-	public int getIdTitular() {
-		return idTitular;
-	}
 
-	public void setIdTitular(int idTitular) {
-		this.idTitular = idTitular;
-	}
 
 	@Override
 	public String toString() {

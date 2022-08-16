@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import model.Banco;
 import model.entidade.Conta;
 import model.entidade.ContaFisica;
+import model.entidade.PessoaFisica;
 import model.entidade.enums.TipoConta;
 
 public class ContaFisicaRepository {
@@ -56,11 +57,13 @@ public class ContaFisicaRepository {
 			resultado = stmt.executeQuery();
 			while(resultado.next()) {
 				ContaFisica conta = new ContaFisica();
-				conta.setIdContaFisica(resultado.getInt(1));
-				conta.setNumeroAgencia(resultado.getString(2));
-				conta.setNumeroConta(resultado.getString(3));
-				conta.setTipo(TipoConta.valueOf(resultado.getString(4).toUpperCase()));
-				conta.setIdTitular(resultado.getInt(5));
+				conta.setIdContaFisica(resultado.getInt("id_contas_pf"));
+				conta.setNumeroAgencia(resultado.getString("agencia"));
+				conta.setNumeroConta(resultado.getString("numero_conta"));
+				conta.setTipo(TipoConta.valueOf(resultado.getString("tipo_conta").toUpperCase()));
+				PessoaFisicaRepository pfr = new PessoaFisicaRepository();
+				PessoaFisica titular = pfr.consultarPessoaFisica(resultado.getInt("id_pf"));
+				conta.setTitular(titular);
 				listaResult.add(conta);
 			}
 		} 
@@ -76,7 +79,7 @@ public class ContaFisicaRepository {
 	
 	public ContaFisica consultarContaFisica(int id) {
 		Connection conm = Banco.getConnection();
-		String query = "select * from contas_pf where id_pf = ?";
+		String query = "select * from contas_pf where id_contas_pf = ?";
 		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
 		ResultSet resultado = null;
 		ContaFisica conta = new ContaFisica();
@@ -88,7 +91,9 @@ public class ContaFisicaRepository {
 				conta.setNumeroAgencia(resultado.getString(2));
 				conta.setNumeroConta(resultado.getString(3));
 				conta.setTipo(TipoConta.valueOf(resultado.getString(4).toUpperCase()));
-				conta.setIdTitular(resultado.getInt(5));
+				PessoaFisicaRepository pfr = new PessoaFisicaRepository();
+				PessoaFisica titular = pfr.consultarPessoaFisica(resultado.getInt("id_pf"));
+				conta.setTitular(titular);
 			}
 		} 
 		catch (SQLException e) {
