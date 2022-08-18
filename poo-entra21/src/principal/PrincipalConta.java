@@ -21,13 +21,13 @@ public class PrincipalConta {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		Scanner input = new Scanner(System.in);
 		PessoaFisica titular1 = new PessoaFisica("matheus", "33389023590", sdf.parse("25-07-1990"), "M");
-		PessoaJuridica empresa1 = new PessoaJuridica("lanchonete pao com ovo", "98765432000400", sdf.parse("15-08-2010"));
+		PessoaJuridica empresa1 = new PessoaJuridica("lanchonete pao com ovo", "98765432000800", sdf.parse("15-08-2010"));
 		PessoaFisicaRepository pfr = new PessoaFisicaRepository();
 		PessoaJuridicaRepository pjr = new PessoaJuridicaRepository();
 		ContaFisicaRepository cfr = new ContaFisicaRepository();
 		ContaFisica conta1 = new ContaFisica("123-4", "5010-1", TipoConta.FISICA, titular1);
 		ContaJuridicaRepository cjr = new ContaJuridicaRepository();
-		ContaJuridica conta2 = new ContaJuridica("123-4", "10003-0", TipoConta.JURIDICA, empresa1);
+		ContaJuridica conta2 = new ContaJuridica("123-4", "10005-0", TipoConta.JURIDICA, empresa1);
 		
 
 		
@@ -77,7 +77,7 @@ public class PrincipalConta {
 		
 		/* LISTAR CONTAS FISICAS E JURIDICAS
 		 */
-		System.out.println(cfr.listarContasFisicas());
+//		System.out.println(cfr.listarContasFisicas());
 //		System.out.println(cjr.listarContasJuridicas());
 		
 		/* CONSULTAR PESSOAS FISICAS E JURIDICAS POR ID
@@ -86,10 +86,14 @@ public class PrincipalConta {
 //		System.out.println(cjr.consultarContaJuridica(2));
 		
 		
+//		ALTERAR CONTA FISICA E JURIDICA
+		
+//		System.out.println(cjr.alterarContaJuridica(empresa1, 7));
+		
 		/* EXCLUIR CONTA FISICA
 		 */
 //		System.out.println(cfr.excluirContaFisica(2));
-//		System.out.println(cjr.excluirContaJuridica(1));
+//		System.out.println(cjr.excluirContaJuridica(5));
 		
 		
 //		Conta conta1 = new Conta("123-7", "12345-6", 600.0);

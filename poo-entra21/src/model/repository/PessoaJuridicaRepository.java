@@ -54,11 +54,11 @@ public class PessoaJuridicaRepository {
 				resultado = stmt.executeQuery();
 				while (resultado.next()) {
 					PessoaJuridica pj = new PessoaJuridica();
-					pj.setIdPj(resultado.getInt(1));
-					pj.setNome(resultado.getString(2));
-					pj.setCnpj(resultado.getString(3));
-					pj.setDataAbertura(resultado.getDate(4));
-					pj.setAdimplente(resultado.getBoolean(5));
+					pj.setIdPj(resultado.getInt("id_pj"));
+					pj.setNome(resultado.getString("nome"));
+					pj.setCnpj(resultado.getString("cnpj"));
+					pj.setDataAbertura(resultado.getDate("data_abertura"));
+					pj.setAdimplente(resultado.getBoolean("adimplente"));
 					listaResult.add(pj);
 				}
 			} 
@@ -84,11 +84,11 @@ public class PessoaJuridicaRepository {
 				stmt.setInt(1, id);
 				resultado = stmt.executeQuery();
 				while (resultado != null && resultado.next()) {
-					pj.setIdPj(resultado.getInt(1));
-					pj.setNome(resultado.getString(2));
-					pj.setCnpj(resultado.getString(3));
-					pj.setDataAbertura(resultado.getDate(4));
-					pj.setAdimplente(resultado.getBoolean(5));
+					pj.setIdPj(resultado.getInt("id_pj"));
+					pj.setNome(resultado.getString("nome"));
+					pj.setCnpj(resultado.getString("cnpj"));
+					pj.setDataAbertura(resultado.getDate("data_abertura"));
+					pj.setAdimplente(resultado.getBoolean("adimplente"));
 				}
 			} 
 			catch (SQLException e) {

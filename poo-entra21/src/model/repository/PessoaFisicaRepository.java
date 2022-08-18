@@ -58,12 +58,12 @@ public class PessoaFisicaRepository {
 			resultado = stmt.executeQuery();
 			while (resultado.next()) {
 				PessoaFisica pf = new PessoaFisica();
-				pf.setIdPf(resultado.getInt(1));
-				pf.setNome(resultado.getString(2));
-				pf.setCpf(resultado.getString(3));
-				pf.setDataNascimento(resultado.getDate(4));
-				pf.setSexo(resultado.getString(5));
-				pf.setAdimplente(resultado.getBoolean(6));
+				pf.setIdPf(resultado.getInt("id_pf"));
+				pf.setNome(resultado.getString("nome"));
+				pf.setCpf(resultado.getString("cpf"));
+				pf.setDataNascimento(resultado.getDate("data_nascto"));
+				pf.setSexo(resultado.getString("sexo"));
+				pf.setAdimplente(resultado.getBoolean("adimplente"));
 				listaResult.add(pf);
 			}
 		}	
@@ -87,12 +87,12 @@ public class PessoaFisicaRepository {
 			stmt.setInt(1, id);
 			resultado = stmt.executeQuery();
 			if (resultado != null && resultado.next()) {
-				pf.setIdPf(resultado.getInt(1));
-				pf.setNome(resultado.getString(2));
-				pf.setCpf(resultado.getString(3));
-				pf.setDataNascimento(resultado.getDate(4));
-				pf.setSexo(resultado.getString(5));
-				pf.setAdimplente(resultado.getBoolean(6));
+				pf.setIdPf(resultado.getInt("id_pf"));
+				pf.setNome(resultado.getString("nome"));
+				pf.setCpf(resultado.getString("cpf"));
+				pf.setDataNascimento(resultado.getDate("data_nascto"));
+				pf.setSexo(resultado.getString("sexo"));
+				pf.setAdimplente(resultado.getBoolean("adimplente"));
 			}	
 		}
 		catch (SQLException e) {

@@ -108,10 +108,26 @@ public class ContaFisicaRepository {
 	}
 	
 	//update
-	// TODO verificar quais campos alterar >> titular?
-	public Conta alterarContaFisica(int id) {
-		
-		return null;
+	public Conta alterarContaFisica(PessoaFisica novoTitular, int id) {
+		Connection conm = Banco.getConnection();
+		String query = " UPDATE contas_pj SET id_pf = ? where id_contas_pf = ? ";
+		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
+		ContaFisica contaAtualizada = null;
+		try {
+			stmt.setInt(1, novoTitular.getIdPf());
+			stmt.setInt(2, id);
+			stmt.executeUpdate();
+			ContaFisicaRepository cfr = new ContaFisicaRepository();
+			contaAtualizada = cfr.consultarContaFisica(id);
+		} 
+		catch (SQLException e) {
+			System.out.println("Erro de insercao no Banco: " + e.getMessage());
+		}
+		finally {
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conm);
+		}
+		return contaAtualizada;
 	}
 	
 	//delete

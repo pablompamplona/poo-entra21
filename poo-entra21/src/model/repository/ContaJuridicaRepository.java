@@ -33,7 +33,7 @@ public class ContaJuridicaRepository {
 			stmt.executeUpdate();
 			resultado = stmt.getGeneratedKeys();
 			if(resultado.next()) {
-				novaContaJuridica.setIdContaJuridica(resultado.getInt(1));
+				novaContaJuridica.setIdContaJuridica(resultado.getInt("id_contas_pj"));
 			}
 		} 
 		catch (SQLException e) {
@@ -50,7 +50,8 @@ public class ContaJuridicaRepository {
 	public ArrayList<ContaJuridica> listarContasJuridicas() {
 		ArrayList<ContaJuridica> listaResult = new ArrayList<>();
 		Connection conm = Banco.getConnection();
-		PreparedStatement stmt = Banco.getPreparedStatement(conm, "select * from contas_pj;");
+		String query = "select * from contas_pj";
+		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
 		ResultSet resultado;
 		
 		try {
@@ -110,10 +111,26 @@ public class ContaJuridicaRepository {
 	}
 	
 	//update
-	// TODO verificar quais campos alterar >> titular?
-	public ContaJuridica alterarContaJuridica(int id) {
-		
-		return null;
+	public ContaJuridica alterarContaJuridica(PessoaJuridica novoTitular, int id) {
+		Connection conm = Banco.getConnection();
+		String query = " UPDATE contas_pj SET id_pj = ? where id_contas_pj = ? ";
+		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
+		ContaJuridica contaAtualizada = null;
+		try {
+			stmt.setInt(1, novoTitular.getIdPj());
+			stmt.setInt(2, id);
+			stmt.executeUpdate();
+			ContaJuridicaRepository cjr = new ContaJuridicaRepository();
+			contaAtualizada = cjr.consultarContaJuridica(id);
+		} 
+		catch (SQLException e) {
+			System.out.println("Erro de insercao no Banco: " + e.getMessage());
+		}
+		finally {
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conm);
+		}
+		return contaAtualizada;
 	}
 	
 	//delete
