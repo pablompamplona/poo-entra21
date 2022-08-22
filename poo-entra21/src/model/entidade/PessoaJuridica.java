@@ -59,10 +59,13 @@ public class PessoaJuridica extends Pessoa {
 	
 	@Override
 	public String toString() {
-		return "ID: " + idPj + "\n" +
+		return "Dados do Cliente: " + "\n" +
+				"ID: " + idPj + "\n" +
 				"Nome: " + getNome() + "\n" +
 				"CNPJ: " + cnpj + "\n" +
-				"Data de Abertura: " + sdf.format(dataAbertura);
+				"Data de Abertura: " + sdf.format(dataAbertura) + "\n" +
+				"==========================================";
+		
 	}
 	
 

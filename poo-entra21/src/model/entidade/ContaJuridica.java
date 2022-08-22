@@ -40,11 +40,16 @@ public class ContaJuridica extends Conta {
 
 	@Override
 	public String toString() {
-		return "ID: " + idContaJuridica + "\n" +
+		return "Dados da Conta: " + "\n" +
+				"ID: " + idContaJuridica + "\n" +
 				"Agencia: " + getNumeroAgencia() + "\n" +
 				"Conta: " + getNumeroConta() + "\n" +
 				"Tipo: " + getTipo() + "\n" +
-				"Titular: " + titular;
+				"Saldo: R$ " + getSaldo() + "\n" +
+				"------------------------------------------" + "\n" +
+				"Dados do Titular: " + "\n" +
+				titular + "\n" +
+				"==========================================";
  	}
 	
 

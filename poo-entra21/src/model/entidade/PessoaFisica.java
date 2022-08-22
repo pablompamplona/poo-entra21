@@ -80,11 +80,13 @@ public class PessoaFisica extends Pessoa {
 	
 		@Override
 		public String toString() {
-			return "ID: " + idPf + "\n" +
+			return "Dados do Cliente: " + "\n" +
+					"ID: " + idPf + "\n" +
 					"Nome: " + getNome() + "\n" +
 					"CPF: " + cpf + "\n" +
 					"Data de Nascimento: " + sdf.format(dataNascimento) + "\n" +
-					"Sexo: " + sexo;
+					"Sexo: " + sexo + "\n" +
+					"==========================================";
 		}
 	
 	

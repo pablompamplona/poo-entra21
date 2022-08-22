@@ -2,6 +2,7 @@ package principal;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.entidade.ContaFisica;
@@ -40,9 +41,16 @@ public class PrincipalConta {
 		
 		/* LISTAR PESSOAS FISICAS E JURIDICAS  
 		 */
-//		System.out.println(pfr.listarPessoaFisica());
-//		System.out.println();
-//		System.out.println(pjr.listarPessoaJuridica());
+		
+//		ArrayList<PessoaFisica> listaResult = pfr.listarPessoaFisica();
+//		for (PessoaFisica p : listaResult) {
+//			System.out.println(p);
+//		}
+
+//		ArrayList<PessoaJuridica> listaResult = pjr.listarPessoaJuridica();
+//		for (PessoaJuridica p : listaResult) {
+//			System.out.println(p);
+//		}
 		
 		/* CONSULTAR PESSOAS FISICAS E JURIDICAS POR ID
 		 */
@@ -77,14 +85,21 @@ public class PrincipalConta {
 		
 		/* LISTAR CONTAS FISICAS E JURIDICAS
 		 */
-//		System.out.println(cfr.listarContasFisicas());
-//		System.out.println(cjr.listarContasJuridicas());
+//		ArrayList<ContaFisica> listaResult = cfr.listarContasFisicas();
+//		for (ContaFisica c : listaResult) {
+//			System.out.println(c);
+//		}
+		
+		ArrayList<ContaJuridica> listaResult = cjr.listarContasJuridicas();
+		for (ContaJuridica c : listaResult) {
+			System.out.println(c);
+		}
 		
 		/* CONSULTAR PESSOAS FISICAS E JURIDICAS POR ID
 		 */
-//		System.out.println(cfr.consultarContaFisica(9));
-//		System.out.println(cjr.consultarContaJuridica(2));
-		
+//		System.out.println(cfr.consultarContaFisica(13));
+//		System.out.println(cjr.consultarContaJuridica(7));
+//		
 		
 //		ALTERAR CONTA FISICA E JURIDICA
 		

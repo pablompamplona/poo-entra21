@@ -50,19 +50,25 @@ public class ContaFisicaRepository {
 	public ArrayList<ContaFisica> listarContasFisicas() {
 		ArrayList<ContaFisica> listaResult = new ArrayList<>();
 		Connection conm = Banco.getConnection();
-		PreparedStatement stmt = Banco.getPreparedStatement(conm, "select * from contas_pf;");
+		PreparedStatement stmt = Banco.getPreparedStatement(conm, "select * from contas_pf c inner join pessoas_fisicas p on c.id_pf = p.id_pf");
 		ResultSet resultado;
 		
 		try {
 			resultado = stmt.executeQuery();
 			while(resultado.next()) {
 				ContaFisica conta = new ContaFisica();
+				PessoaFisica titular = new PessoaFisica();
 				conta.setIdContaFisica(resultado.getInt("id_contas_pf"));
 				conta.setNumeroAgencia(resultado.getString("agencia"));
 				conta.setNumeroConta(resultado.getString("numero_conta"));
 				conta.setTipo(TipoConta.valueOf(resultado.getString("tipo_conta").toUpperCase()));
-				PessoaFisicaRepository pfr = new PessoaFisicaRepository();
-				PessoaFisica titular = pfr.consultarPessoaFisica(resultado.getInt("id_pf"));
+				conta.setSaldo(resultado.getDouble("saldo"));
+				titular.setIdPf(resultado.getInt("id_pf"));
+				titular.setNome(resultado.getString("nome"));
+				titular.setCpf(resultado.getString("cpf"));
+				titular.setDataNascimento(resultado.getDate("data_nascto"));
+				titular.setSexo(resultado.getString("sexo"));
+				titular.setAdimplente(resultado.getBoolean("adimplente"));
 				conta.setTitular(titular);
 				listaResult.add(conta);
 			}
@@ -79,20 +85,26 @@ public class ContaFisicaRepository {
 	
 	public ContaFisica consultarContaFisica(int id) {
 		Connection conm = Banco.getConnection();
-		String query = "select * from contas_pf where id_contas_pf = ?";
+		String query = "select * from contas_pf c inner join pessoas_fisicas p on c.id_pf = p.id_pf where c.id_contas_pf = ?";
 		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
 		ResultSet resultado = null;
 		ContaFisica conta = new ContaFisica();
+		PessoaFisica titular = new PessoaFisica();
 		try {
 			stmt.setInt(1, id);
 			resultado = stmt.executeQuery();
 			if (resultado != null && resultado.next()) {
-				conta.setIdContaFisica(resultado.getInt(1));
-				conta.setNumeroAgencia(resultado.getString(2));
-				conta.setNumeroConta(resultado.getString(3));
-				conta.setTipo(TipoConta.valueOf(resultado.getString(4).toUpperCase()));
-				PessoaFisicaRepository pfr = new PessoaFisicaRepository();
-				PessoaFisica titular = pfr.consultarPessoaFisica(resultado.getInt("id_pf"));
+				conta.setIdContaFisica(resultado.getInt("id_contas_pf"));
+				conta.setNumeroAgencia(resultado.getString("agencia"));
+				conta.setNumeroConta(resultado.getString("numero_conta"));
+				conta.setTipo(TipoConta.valueOf(resultado.getString("tipo_conta").toUpperCase()));
+				conta.setSaldo(resultado.getDouble("saldo"));
+				titular.setIdPf(resultado.getInt("id_pf"));
+				titular.setNome(resultado.getString("nome"));
+				titular.setCpf(resultado.getString("cpf"));
+				titular.setDataNascimento(resultado.getDate("data_nascto"));
+				titular.setSexo(resultado.getString("sexo"));
+				titular.setAdimplente(resultado.getBoolean("adimplente"));
 				conta.setTitular(titular);
 			}
 		} 

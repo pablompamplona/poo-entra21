@@ -45,11 +45,16 @@ public class ContaFisica extends Conta{
 
 	@Override
 	public String toString() {
-		return "ID: " + idContaFisica + "\n" +
+		return "Dados da Conta: \n" +
+				"ID: " + idContaFisica + "\n" +
 				"Agencia: " + getNumeroAgencia() + "\n" +
 				"Conta: " + getNumeroConta() + "\n" +
 				"Tipo: " + getTipo() + "\n" +
-				"Titular: " + titular;
+				"Saldo: R$ " + getSaldo() + "\n" +
+				"------------------------------------------" + "\n" +
+				"Dados do Titular: \n" +
+				titular + "\n" +
+				"==========================================";
  	}
 
 	public void setTipo(String string) {

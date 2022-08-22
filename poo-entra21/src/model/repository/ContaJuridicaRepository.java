@@ -50,7 +50,7 @@ public class ContaJuridicaRepository {
 	public ArrayList<ContaJuridica> listarContasJuridicas() {
 		ArrayList<ContaJuridica> listaResult = new ArrayList<>();
 		Connection conm = Banco.getConnection();
-		String query = "select * from contas_pj";
+		String query = "SELECT * FROM contas_pj c INNER JOIN pessoas_juridicas p ON c.id_pj = p.id_pj";
 		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
 		ResultSet resultado;
 		
@@ -58,13 +58,17 @@ public class ContaJuridicaRepository {
 			resultado = stmt.executeQuery();
 			while (resultado != null && resultado.next()) {
 				ContaJuridica conta = new ContaJuridica();
+				PessoaJuridica titular = new PessoaJuridica();
 				conta.setIdContaJuridica(resultado.getInt("id_contas_pj"));
 				conta.setNumeroAgencia(resultado.getString("agencia"));
 				conta.setNumeroConta(resultado.getString("numero_conta"));
 				conta.setTipo(TipoConta.valueOf(resultado.getString("tipo_conta").toUpperCase()));
 				conta.setSaldo(resultado.getDouble("saldo"));
-				PessoaJuridicaRepository pjr = new PessoaJuridicaRepository();
-				PessoaJuridica titular = pjr.consultarPessoaJuridica(resultado.getInt("id_pj"));
+				titular.setIdPj(resultado.getInt("id_pj"));
+				titular.setNome(resultado.getString("nome"));
+				titular.setCnpj(resultado.getString("cnpj"));
+				titular.setDataAbertura(resultado.getDate("data_abertura"));
+				titular.setAdimplente(resultado.getBoolean("adimplente"));				
 				conta.setTitular(titular);
 				listaResult.add(conta);
 			}
@@ -81,10 +85,11 @@ public class ContaJuridicaRepository {
 	
 	public ContaJuridica consultarContaJuridica(int id) {
 		Connection conm = Banco.getConnection();
-		String query = "select * from contas_pj where id_contas_pj = ?";
+		String query = "SELECT * FROM contas_pj c INNER JOIN pessoas_juridicas p ON c.id_pj = p.id_pj WHERE id_contas_pj = ?";
 		PreparedStatement stmt = Banco.getPreparedStatement(conm, query);
 		ResultSet resultado = null;
 		ContaJuridica conta = new ContaJuridica();
+		PessoaJuridica titular = new PessoaJuridica();
 		
 		try {
 			stmt.setInt(1, id);
@@ -95,8 +100,11 @@ public class ContaJuridicaRepository {
 				conta.setNumeroConta(resultado.getString("numero_conta"));
 				conta.setTipo(TipoConta.valueOf(resultado.getString("tipo_conta").toUpperCase()));
 				conta.setSaldo(resultado.getDouble("saldo"));
-				PessoaJuridicaRepository pjr = new PessoaJuridicaRepository();
-				PessoaJuridica titular = pjr.consultarPessoaJuridica(resultado.getInt("id_pj"));
+				titular.setIdPj(resultado.getInt("id_pj"));
+				titular.setNome(resultado.getString("nome"));
+				titular.setCnpj(resultado.getString("cnpj"));
+				titular.setDataAbertura(resultado.getDate("data_abertura"));
+				titular.setAdimplente(resultado.getBoolean("adimplente"));
 				conta.setTitular(titular);
 			}
 		} 
