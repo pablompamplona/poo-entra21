@@ -44,7 +44,7 @@ public class PessoaJuridicaRepository {
 		}
 		
 		//retrieve
-		public ArrayList<PessoaJuridica> listarPessoaJuridica() {
+		public ArrayList<PessoaJuridica> listarPessoasJuridicas() {
 			ArrayList<PessoaJuridica> listaResult = new ArrayList();
 			Connection conm = Banco.getConnection();
 			PreparedStatement stmt = Banco.getPreparedStatement(conm, "SELECT * FROM pessoas_juridicas;");

@@ -11,14 +11,9 @@ public abstract class Conta {
 	private TipoConta tipo;
 	private double saldo;
 	
-	
-
 	public Conta() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	
-	
 
 	public Conta(String numeroAgencia, String numeroConta, TipoConta tipo) {
 		super();

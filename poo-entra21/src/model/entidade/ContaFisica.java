@@ -6,6 +6,7 @@ public class ContaFisica extends Conta{
 	
 	private int idContaFisica;
 	private PessoaFisica titular;
+	private int idPf;
 
 	
 	
@@ -63,5 +64,13 @@ public class ContaFisica extends Conta{
 	
 	public void setTitular(int id) {
 		
+	}
+
+	public int getIdPf() {
+		return idPf;
+	}
+
+	public void setIdPf(int idPf) {
+		this.idPf = idPf;
 	}
 }

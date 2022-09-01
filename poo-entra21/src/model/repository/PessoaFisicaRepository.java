@@ -49,7 +49,7 @@ public class PessoaFisicaRepository {
 	}
 	
 	//retrieve
-	public ArrayList<PessoaFisica> listarPessoaFisica() {
+	public ArrayList<PessoaFisica> listarPessoasFisicas() {
 		ArrayList<PessoaFisica> listaResult = new ArrayList();
 		Connection conm = Banco.getConnection();
 		PreparedStatement stmt = Banco.getPreparedStatement(conm, "select * from pessoas_fisicas;");

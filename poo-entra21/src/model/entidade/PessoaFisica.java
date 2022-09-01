@@ -7,21 +7,19 @@ import java.util.Date;
 import java.util.List;
 
 public class PessoaFisica extends Pessoa {
-	
-	private int idPf;
+
+	private Integer idPf;
 	private String cpf;
 	private Date dataNascimento;
 	private String sexo;
-	
+
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-	
-			
+
 	//Construtores
 	public PessoaFisica() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	
+
 	public PessoaFisica(String nome, String cpf, Date dataNascimento, String sexo) throws ParseException {
 		super(nome);
 		this.cpf = cpf;
@@ -49,12 +47,12 @@ public class PessoaFisica extends Pessoa {
 		int idade = dataNascimento.get(Calendar.YEAR) - hoje.get(Calendar.YEAR);
 		return idade;
 	}
-	
-	public int getIdPf() {
+
+	public Integer getIdPf() {
 		return idPf;
 	}
 
-	public void setIdPf(int idPf) {
+	public void setIdPf(Integer idPf) {
 		this.idPf = idPf;
 	}
 
@@ -77,19 +75,15 @@ public class PessoaFisica extends Pessoa {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	
-		@Override
-		public String toString() {
-			return "Dados do Cliente: " + "\n" +
-					"ID: " + idPf + "\n" +
-					"Nome: " + getNome() + "\n" +
-					"CPF: " + cpf + "\n" +
-					"Data de Nascimento: " + sdf.format(dataNascimento) + "\n" +
-					"Sexo: " + sexo + "\n" +
-					"==========================================";
-		}
-	
-	
-	
 
+	@Override
+	public String toString() {
+		return "Dados do Cliente: " + "\n" +
+				"ID: " + idPf + "\n" +
+				"Nome: " + getNome() + "\n" +
+				"CPF: " + cpf + "\n" +
+				"Data de Nascimento: " + sdf.format(dataNascimento) + "\n" +
+				"Sexo: " + sexo + "\n" +
+				"==========================================";
+	}
 }
